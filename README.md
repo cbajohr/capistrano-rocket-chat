@@ -1,5 +1,5 @@
 # Capistrano::Rocket::Chat
-rocket.chat webhook plugin for Capistrano 3. 
+rocket.chat webhook plugin for [Capistrano 3](https://github.com/capistrano/capistrano). 
 
 ## Installation
 
