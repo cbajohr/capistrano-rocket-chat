@@ -20,7 +20,7 @@ Or install it yourself as:
 In your *Capfile* add this line:
 
 ```ruby
-  require 'capistrano/rocket_chat'
+require 'capistrano/rocket_chat'
 ```
 
 Add the rocket.chat webhook url including the webhook token to your *deploy.rb* file:
