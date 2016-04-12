@@ -1,7 +1,7 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'capistrano/rocket/chat/version'
+require 'capistrano/rocket_chat/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "capistrano-rocket-chat"
@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "rocket.chat webhook-plugin for capistrano 3 deployments."
   spec.description   = "rocket.chat webhook-plugin for capistrano 3 deployments."
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/cbajohr/capistrano-rocket-chat"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.11"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "minitest", "~> 5.0"
+  spec.add_dependency "capistrano", ">= 3.1"
+  spec.add_dependency "httparty"
+  spec.add_development_dependency "rake"
 end

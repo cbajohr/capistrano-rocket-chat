@@ -1,0 +1,62 @@
+require 'httparty'
+
+before 'deploy:starting', 'rocket_chat_notify:starting'
+before 'deploy:failed', 'rocket_chat_notify:failed'
+before 'deploy:finished', 'rocket_chat_notify:finished'
+
+namespace :rocket_chat_notify do
+  desc 'Notify rocket-chat on start of deployment'
+  task :starting do |task|
+    on roles(:all) do |host|
+      notify(:starting)
+    end
+  end
+  task :finished do |task|
+    on roles(:all) do |host|
+      notify(:finished)
+    end
+  end
+  task :failed do |task|
+    on roles(:all) do |host|
+      notify(:failed)
+    end
+  end
+end
+
+def get_config_vars()
+  return {
+    rocket_chat_url: fetch(:rocket_chat_webhook_url),
+    application: fetch(:application),
+    branch: fetch(:branch),
+    repo_url: fetch(:branch),
+    stage: fetch(:stage),
+    deploy_to: fetch(:deploy_to),
+    rails_env: fetch(:rails_env),
+   }
+end
+
+def notify(event_hook)
+  config = get_config_vars
+
+  raise "\n\nERROR::ROCKET-CHAT-TASK: config option 'rocket_chat_webhook_url' is not set\n\n" unless config[:rocket_chat_url]
+  
+  notification_text = "#{event_hook}: deployment branch '#{config[:branch]}' to #{config[:stage]}"
+ 
+  request_body = {
+    event: {
+      hook: event_hook,
+      text: notification_text,
+    },
+    attributes: {
+      application: config[:application],
+      branch: config[:branch],
+      stage: config[:stage],
+      repo_url: config[:repo_url],
+      rails_env: config[:rails_env],
+      deploy_to: config[:deploy_to]
+    }
+  }
+
+  HTTParty.post("#{config[:rocket_chat_url]}", body: request_body).body 
+end
+

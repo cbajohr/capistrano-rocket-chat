@@ -1,6 +1,4 @@
 # Capistrano::Rocket::Chat
-WORK IN PROGRESS
-
 rocket.chat webhook plugin for Capistrano 3. 
 
 ## Installation
@@ -19,9 +17,27 @@ Or install it yourself as:
 
     $ gem install capistrano-rocket-chat
 
+In your Capfile add this line:
+
+  require 'capistrano/rocket_chat'
+
+Add the rocket.chat webhook url including the webhook token to your deploy.rb file:
+
+```ruby
+set :rocket_chat_webhook_url, "https://mychat.com/hooks/MYTOKEN"
+```
+
 ## Usage
 
-tba.
+The webhook fires a webhook message to the set rocket chat on the following capistrano flow events: 
+* :starting
+* :failed
+* :finished
+
+Additionally you will need a parser script for your incoming rocket.chat webhook.
+
+If you don't want to code one yourself, here is a working script for you:
+https://github.com/cbajohr/capistrano-rocket-chat/wiki/rocket.chat-parser-script-example
 
 ## Development
 
@@ -32,7 +48,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/cbajohr/capistrano-rocket-chat. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
 
 ## License
 
