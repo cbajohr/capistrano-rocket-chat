@@ -9,15 +9,15 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Christoph Bajohr"]
   spec.email         = ["christoph@bajohr.org"]
 
-  spec.summary       = "rocket.chat webhook-plugin for capistrano 3 deployments."
-  spec.description   = "rocket.chat webhook-plugin for capistrano 3 deployments."
+  spec.summary       = "rocket.chat webhook gem for capistrano 3"
+  spec.description   = "rocket.chat webhook gem for capistrano 3"
   spec.homepage      = "https://github.com/cbajohr/capistrano-rocket-chat"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
   if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
+    spec.metadata['allowed_push_host'] = "https://rubygems.org"
   else
     raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
   end
