@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["christoph@bajohr.org"]
 
   spec.summary       = "rocket.chat webhook gem for capistrano 3"
-  spec.description   = "rocket.chat webhook gem for capistrano 3"
+  spec.description   = "rocket.chat webhook gem for capistrano 3. For further information visit the github page: https://github.com/cbajohr/capistrano-rocket-chat"
   spec.homepage      = "https://github.com/cbajohr/capistrano-rocket-chat"
   spec.license       = "MIT"
 

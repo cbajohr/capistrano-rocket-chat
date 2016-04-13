@@ -1,4 +1,4 @@
-# Capistrano::Rocket::Chat
+# capistrano-rocket-chat
 rocket.chat webhook gem for [Capistrano 3](https://github.com/capistrano/capistrano). 
 
 ## Installation
