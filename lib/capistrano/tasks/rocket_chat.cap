@@ -32,29 +32,32 @@ def get_config_vars()
     stage: fetch(:stage),
     deploy_to: fetch(:deploy_to),
     rails_env: fetch(:rails_env),
+    scm: fetch(:scm),
+    log_level: fetch(:log_level),
+    local_user: @task.local_user,
+    server: {
+      name: @host.hostname,
+      user: @host.user,
+      roles: @host.roles,
+      ssh_options: @host.ssh_options
+    }
    }
 end
 
 def notify(event_hook)
+
   config = get_config_vars
 
   raise "\n\nERROR::ROCKET-CHAT-TASK: config option 'rocket_chat_webhook_url' is not set\n\n" unless config[:rocket_chat_url]
   
-  notification_text = "#{event_hook}: deployment branch '#{config[:branch]}' to #{config[:stage]}"
- 
+  notification_text = "#{event_hook} deployment to '#{config[:server][:name]}' on branch '#{config[:branch]}' to stage '#{config[:stage]}'"
+
   request_body = {
     event: {
       hook: event_hook,
-      text: notification_text,
+      text: notification_text
     },
-    attributes: {
-      application: config[:application],
-      branch: config[:branch],
-      stage: config[:stage],
-      repo_url: config[:repo_url],
-      rails_env: config[:rails_env],
-      deploy_to: config[:deploy_to]
-    }
+    attributes: config
   }
 
   HTTParty.post("#{config[:rocket_chat_url]}", body: request_body).body 
