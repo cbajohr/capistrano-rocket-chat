@@ -43,6 +43,41 @@ Additionally you will need a parser script for your rocket.chat for the incoming
 If you don't want to code one yourself, here is a working script with basic functionality for you:
 https://github.com/cbajohr/capistrano-rocket-chat/wiki/rocket.chat-parser-script-example
 
+
+## Post examples
+
+Example JSON that is pushed by the gem.
+
+Possible 'event -> hook' states are:
+* starting
+* failed
+* finished
+
+```JSON
+{
+  "event": {
+    "hook": "failed",
+    "text": "failed deployment to 'www.server.de' on branch 'master' to stage 'production'"
+  },
+  "attributes": {
+    "rocket_chat_url": "http://mychat.com/mytoken",
+    "application": "my_application",
+    "branch": "master",
+    "repo_url": "git@my_git.com/repo/repo",
+    "stage": "production",
+    "deploy_to": "/var/www/my_vhost_name",
+    "rails_env": "production",
+    "scm": "git",
+    "log_level": "debug",
+    "local_user": "johndoe",
+    "server": {
+      "name": "my_server.com",
+      "user": "my_ssh_user"
+    }
+  }
+}
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

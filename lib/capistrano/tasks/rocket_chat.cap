@@ -28,7 +28,7 @@ def get_config_vars()
     rocket_chat_url: fetch(:rocket_chat_webhook_url),
     application: fetch(:application),
     branch: fetch(:branch),
-    repo_url: fetch(:branch),
+    repo_url: fetch(:repo_url),
     stage: fetch(:stage),
     deploy_to: fetch(:deploy_to),
     rails_env: fetch(:rails_env),
@@ -37,9 +37,7 @@ def get_config_vars()
     local_user: @task.local_user,
     server: {
       name: @host.hostname,
-      user: @host.user,
-      roles: @host.roles,
-      ssh_options: @host.ssh_options
+      user: @host.user
     }
    }
 end
