@@ -1,7 +1,7 @@
 module Capistrano
   module Rocket
     module Chat
-      VERSION = "0.1.4"
+      VERSION = "0.1.6"
     end
   end
 end
