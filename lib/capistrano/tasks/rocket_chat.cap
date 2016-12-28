@@ -50,6 +50,12 @@ def notify(event_hook)
   
   notification_text = "#{event_hook} deployment to '#{config[:server][:name]}' on branch '#{config[:branch]}' to stage '#{config[:stage]}'"
 
+  if dry_run?
+    puts "[Rocket Chat] #{event_hook}"
+    puts "[Rocket Chat] #{notification_text}"
+    return
+  end
+
   request_body = {
     event: {
       hook: event_hook,
