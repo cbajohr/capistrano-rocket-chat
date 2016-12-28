@@ -58,6 +58,12 @@ def notify(event_hook)
     attributes: config
   }
 
-  HTTParty.post("#{config[:rocket_chat_url]}", body: request_body).body 
+  begin
+    puts "[Rocket Chat] #{event_hook}"
+    HTTParty.post("#{config[:rocket_chat_url]}", body: request_body, timeout: 10).body
+  rescue => e
+    puts "[Rocket Chat] Error notifying Rocket chat!"
+    puts "[Rocket Chat] Error: #{e.inspect}"
+  end
 end
 
