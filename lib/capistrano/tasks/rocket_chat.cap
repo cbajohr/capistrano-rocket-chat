@@ -26,6 +26,7 @@ end
 def get_config_vars()
   return {
     rocket_chat_url: fetch(:rocket_chat_webhook_url),
+    rocket_chat_channel: fetch(:rocket_chat_channel),
     application: fetch(:application),
     branch: fetch(:branch),
     repo_url: fetch(:repo_url),
