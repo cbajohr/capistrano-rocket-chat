@@ -29,9 +29,12 @@ Add the rocket.chat webhook url including the webhook token to your *deploy.rb* 
 set :rocket_chat_webhook_url, "https://mychat.com/hooks/MYTOKEN"
 ```
 
-You can override the channel:
 
-```ruby
+_Optionnal_
+
+If you want override the channel directly in the capistrano config:
+
+```
 set :rocket_chat_channel, "#CHANNEL"
 ```
 
@@ -67,7 +70,7 @@ Possible 'event -> hook' states are:
   },
   "attributes": {
     "rocket_chat_url": "http://mychat.com/mytoken",
-    "rocket_chat_channel": "#general",
+    "rocket_chat_channel": "#test",
     "application": "my_application",
     "branch": "master",
     "repo_url": "git@my_git.com/repo/repo",
@@ -84,6 +87,8 @@ Possible 'event -> hook' states are:
   }
 }
 ```
+
+The rocketchat channel is passed in the JSON if only you have defined it in the capistrano config.
 
 ## Development
 
