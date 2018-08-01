@@ -36,20 +36,25 @@ def get_config_vars()
     scm: fetch(:scm),
     log_level: fetch(:log_level),
     local_user: @task.local_user,
-    server: {
-      name: @host.hostname,
-      user: @host.user
-    }
-   }
+    remote_host: @host.hostname,
+    remote_user:  @host.user
+  }.merge(fetch(:rocket_chat_settings, {}))
 end
+
+DEFAULT_NOTIFICATION_TEMPLATE = "%{event_hook} deployment to '%{remote_host}' on branch '%{branch}' to stage '%{stage}'"
 
 def notify(event_hook)
 
-  config = get_config_vars
+  config = get_config_vars.merge(event_hook: event_hook)
 
   raise "\n\nERROR::ROCKET-CHAT-TASK: config option 'rocket_chat_webhook_url' is not set\n\n" unless config[:rocket_chat_url]
   
-  notification_text = "#{event_hook} deployment to '#{config[:server][:name]}' on branch '#{config[:branch]}' to stage '#{config[:stage]}'"
+  notification_template = case event_hook
+                          when :starting then config[:start_deployment_template]
+                          when :finished then config[:finish_deployment_template]
+                          end || DEFAULT_NOTIFICATION_TEMPLATE
+
+  notification_text = notification_template % config
 
   if dry_run?
     puts "[Rocket Chat] #{event_hook}"
